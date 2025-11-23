@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogisTech Warehouse Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">📦</div>
+                <h1>LogisTech <span class="highlight">Prime</span></h1>
+            </div>
+            <div class="status-indicator">
+                <span class="dot"></span> System Online
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard-grid">
+                <!-- LEFT COLUMN: OPERATIONS -->
+                <div class="col-left">
+                    <!-- 1. INGESTION -->
+                    <div class="card">
+                        <h2>📥 Ingest Package</h2>
+                        <form id="ingestForm">
+                            <div class="form-row">
+                                <input type="text" id="pkgId" placeholder="Tracking ID (e.g. PKG-101)" required>
+                                <input type="number" id="pkgSize" placeholder="Size" required>
+                            </div>
+                            <input type="text" id="pkgDest" placeholder="Destination" required>
+                            <button type="submit" class="btn primary">Add to Conveyor Queue</button>
+                        </form>
+                    </div>
+
+                    <!-- 2. CONVEYOR BELT -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>⚙️ Conveyor Belt (FIFO)</h2>
+                            <button id="processBtn" class="btn secondary small">Process Next</button>
+                        </div>
+                        <div class="queue-container" id="queueContainer">
+                            <div class="empty-state">Queue is empty</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. SHIPMENT PLANNER -->
+                    <div class="card">
+                        <h2>🧠 Shipment Planner (Backtracking)</h2>
+                        <div class="planner-input">
+                            <textarea id="plannerInput"
+                                placeholder="Enter packages JSON: [{id:'A', size:10}, ...]"></textarea>
+                            <input type="number" id="plannerCap" placeholder="Truck Capacity" value="100">
+                        </div>
+                        <button id="checkFitBtn" class="btn accent">Check Fit</button>
+                        <div id="plannerResult" class="result-box"></div>
+                    </div>
+                </div>
+
+                <!-- MIDDLE COLUMN: WAREHOUSE STATE -->
+                <div class="col-mid">
+                    <!-- 4. BIN INVENTORY -->
+                    <div class="card warehouse-view">
+                        <h2>🏭 Bin Inventory (Binary Search Storage)</h2>
+                        <div class="bin-grid" id="binGrid">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: TRUCK & LOGS -->
+                <div class="col-right">
+                    <!-- 5. TRUCK LOADING -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🚚 Truck Loading (LIFO Stack)</h2>
+                            <button id="rollbackBtn" class="btn danger small">Rollback (1)</button>
+                        </div>
+                        <div class="truck-controls">
+                            <input type="text" id="truckPkgId" placeholder="Pkg ID">
+                            <input type="number" id="truckPkgSize" placeholder="Size">
+                            <button id="loadTruckBtn" class="btn secondary">Load Item</button>
+                        </div>
+                        <div class="stack-container" id="stackContainer">
+                            <div class="empty-state">Truck is empty</div>
+                        </div>
+                    </div>
+
+                    <!-- 6. LOGS -->
+                    <div class="card logs">
+                        <h2>📜 System Logs (SQL)</h2>
+                        <div class="log-container" id="logContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/app.js"></script>
+</body>
+
+</html>

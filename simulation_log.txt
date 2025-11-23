@@ -1,0 +1,21 @@
+=== LogisTech System Startup ===
+Singleton Verification: PASSED
+
+--- Ingestion & Storage (Binary Search) ---
+Package PKG001 arrived (Size: 12).
+Assigned Package PKG001 to Bin 3 (Capacity: 15).
+Package PKG002 arrived (Size: 4).
+Assigned Package PKG002 to Bin 1 (Capacity: 5).
+Package PKG003 arrived (Size: 55).
+Assigned Package PKG003 to Bin 5 (Capacity: 100).
+Package PKG004 arrived (Size: 200).
+No suitable bin found for Package PKG004 (Size: 200).
+
+--- Truck Loading (Backtracking & Stack) ---
+Attempting to load truck (Capacity: 100)...
+Optimal load found. Loading truck...
+Loaded package SHIP001 onto truck.
+Loaded package SHIP002 onto truck.
+Loaded package SHIP003 onto truck.
+
+--- Verification Complete ---
