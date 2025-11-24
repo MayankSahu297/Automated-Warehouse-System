@@ -55,6 +55,39 @@ A centralized Singleton Controller powers the entire workflow, while SQL audit l
 
 The system follows a centralized "Control Tower" architecture where the **WarehouseController (Singleton)** coordinates all operations.
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         USER / WEB UI                        │
+│                    (HTML + CSS + JavaScript)                 │
+└────────────────────────┬────────────────────────────────────┘
+                         │ HTTP Requests
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      FastAPI Backend                         │
+│                    (REST API Endpoints)                      │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│              LogisTech Controller (Singleton)                │
+│                  Centralized Orchestration                   │
+└─┬───────────┬────────────┬──────────────┬──────────────────┘
+  │           │            │              │
+  ▼           ▼            ▼              ▼
+┌──────┐  ┌──────┐  ┌──────────┐  ┌─────────────┐
+│Queue │  │Stack │  │Binary    │  │Backtracking │
+│(FIFO)│  │(LIFO)│  │Search    │  │Planner      │
+└──┬───┘  └──┬───┘  └────┬─────┘  └──────┬──────┘
+   │         │           │                │
+   └─────────┴───────────┴────────────────┘
+                         │
+                         ▼
+              ┌──────────────────────┐
+              │  SQLite Database     │
+              │  (Audit Logs + Bins) │
+              └──────────────────────┘
+```
+
 **Explanation:**
 - **Frontend ↔ Backend ↔ Database** are loosely coupled for scalability.
 - The **Controller** acts as the brain, managing the state of the Queue, Stack, and Inventory.
