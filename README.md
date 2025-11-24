@@ -55,17 +55,6 @@ A centralized Singleton Controller powers the entire workflow, while SQL audit l
 
 The system follows a centralized "Control Tower" architecture where the **WarehouseController (Singleton)** coordinates all operations.
 
-```mermaid
-graph TD
-    User[User / Web UI] -->|HTTP Requests| API[FastAPI Backend]
-    API -->|Calls| Controller[LogisTech Controller (Singleton)]
-    Controller -->|FIFO| Queue[Conveyor Belt]
-    Controller -->|Binary Search| Inventory[Bin Inventory]
-    Controller -->|Backtracking| Planner[Shipment Planner]
-    Controller -->|LIFO| Stack[Truck Loading Dock]
-    Controller -->|Persist| DB[(MySQL Database)]
-```
-
 **Explanation:**
 - **Frontend ↔ Backend ↔ Database** are loosely coupled for scalability.
 - The **Controller** acts as the brain, managing the state of the Queue, Stack, and Inventory.
