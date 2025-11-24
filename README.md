@@ -1,6 +1,7 @@
 # LogisTech: Automated Warehouse Management System
 
-![LogisTech Banner](https://placehold.co/1200x300/1e293b/3b82f6?text=LogisTech+Automated+Warehouse+System)
+![LogisTech Banner]
+<img width="302" height="69" alt="Screenshot 2025-11-24 132101" src="https://github.com/user-attachments/assets/34766829-0554-4b99-9e7b-eed1edd1c9e6" />
 
 🌐 Live Demo
 
@@ -201,10 +202,13 @@ Go to: `http://127.0.0.1:8000`
 > *Placeholders for actual screenshots*
 
 ### Dashboard Overview
-![Dashboard](https://placehold.co/600x400/1e293b/3b82f6?text=Dashboard+Screenshot)
+![Dashboard]<img width="1918" height="874" alt="Screenshot 2025-11-24 131830" src="https://github.com/user-attachments/assets/ce0656c6-ad9b-4e3f-9a07-2aa6a8e660b9" />
+
 
 ### Conveyor & Inventory
-![Inventory](https://placehold.co/600x400/1e293b/3b82f6?text=Inventory+View)
+![Inventory]
+<img width="368" height="213" alt="Screenshot 2025-11-24 131900" src="https://github.com/user-attachments/assets/95bf74d6-c677-4799-869e-3537cda99165" />
+<img width="1112" height="199" alt="Screenshot 2025-11-24 131907" src="https://github.com/user-attachments/assets/ade5a51d-c105-422e-beee-8cf318c3526d" />
 
 ## 🔮 Future Enhancements
 
