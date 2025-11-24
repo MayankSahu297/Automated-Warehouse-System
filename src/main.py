@@ -1,7 +1,6 @@
 from controller import LogiMaster
 from models import Package
 from database import Database
-import sqlite3
 
 def setup_dummy_data():
     """Populate DB with some initial bins for the demo"""
@@ -18,7 +17,7 @@ def setup_dummy_data():
         (4, 50, 'B2'),
         (5, 100, 'C1')
     ]
-    cursor.executemany("INSERT INTO bins (bin_id, capacity, location_code) VALUES (?, ?, ?)", bins)
+    cursor.executemany("INSERT INTO bins (bin_id, capacity, location_code) VALUES (%s, %s, %s)", bins)
     db.conn.commit()
     db.close()
 

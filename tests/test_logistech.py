@@ -12,17 +12,9 @@ class TestLogisTech(unittest.TestCase):
         # Reset Singleton for testing purposes (Hack for testing)
         LogiMaster._instance = None
         
-        # Setup clean DB
-        self.db_name = "test_logistech.db"
-        if os.path.exists(self.db_name):
-            os.remove(self.db_name)
-            
-        # Initialize Controller with test DB
-        # We need to patch the database init in controller or just use the default and clean it?
-        # The controller uses "logistech.db" by default. Let's just use the main one but clean it.
-        # Or better, let's modify the controller to accept a db_name, but for now let's stick to the existing code
-        # and just clean the bins table.
-        
+        # Initialize Controller
+        # Note: This will connect to the MySQL database configured in env vars.
+        # Ensure you are using a TEST database to avoid wiping production data.
         self.controller = LogiMaster()
         
         # Clear data
@@ -40,8 +32,9 @@ class TestLogisTech(unittest.TestCase):
             (4, 50, 'B2'),
             (5, 100, 'C1')
         ]
-        cursor.executemany("INSERT INTO bins (bin_id, capacity, location_code) VALUES (?, ?, ?)", bins)
+        cursor.executemany("INSERT INTO bins (bin_id, capacity, location_code) VALUES (%s, %s, %s)", bins)
         conn.commit()
+        cursor.close()
         
         # Reload inventory
         self.controller.load_inventory()
@@ -110,8 +103,10 @@ class TestLogisTech(unittest.TestCase):
         cursor = self.controller.db.conn.cursor()
         cursor.execute("SELECT * FROM shipment_logs WHERE tracking_id='SQLTEST'")
         row = cursor.fetchone()
+        cursor.close()
         self.assertIsNotNone(row)
-        self.assertEqual(row[3], "STORED") # Status
+        # New schema: id, tracking_id, bin_id, timestamp, status
+        self.assertEqual(row[4], "STORED") # Status is now at index 4
 
 if __name__ == '__main__':
     unittest.main()

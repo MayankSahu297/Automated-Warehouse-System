@@ -1,4 +1,8 @@
 from fastapi import FastAPI, HTTPException
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -158,8 +162,9 @@ def get_logs():
     cursor = controller.db.conn.cursor()
     cursor.execute("SELECT * FROM shipment_logs ORDER BY timestamp DESC LIMIT 50")
     rows = cursor.fetchall()
+    cursor.close()
     logs = [
-        f"[{r[2]}] {r[0]}: {r[3]} (Bin {r[1]})" for r in rows
+        f"[{r[3]}] {r[1]}: {r[4]} (Bin {r[2]})" for r in rows
     ]
     return {"logs": logs}
 

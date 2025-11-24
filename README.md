@@ -60,7 +60,7 @@ graph TD
     Controller -->|Binary Search| Inventory[Bin Inventory]
     Controller -->|Backtracking| Planner[Shipment Planner]
     Controller -->|LIFO| Stack[Truck Loading Dock]
-    Controller -->|Persist| DB[(SQLite Database)]
+    Controller -->|Persist| DB[(MySQL Database)]
 ```
 
 **Explanation:**
@@ -104,26 +104,27 @@ graph TD
 - Backtracking Algorithm
 
 ### Database
-- **SQLite** (Lightweight, Serverless)
+- **MySQL** (Relational Database Management System)
 
-## 🗄 Database Schema
+### 🗄 Database Schema
 
 The system uses a relational database to ensure data persistence.
 
 ### 📄 `shipment_logs`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `tracking_id` | TEXT | Unique Package ID |
-| `bin_id` | INTEGER | ID of the bin (or -1 for Truck) |
+| `id` | INT | Primary Key (Auto Increment) |
+| `tracking_id` | VARCHAR | Unique Package ID |
+| `bin_id` | INT | ID of the bin (or -1 for Truck) |
 | `timestamp` | DATETIME | Time of operation |
-| `status` | TEXT | STORED, LOADED, ROLLBACK, etc. |
+| `status` | VARCHAR | STORED, LOADED, ROLLBACK, etc. |
 
 ### 📦 `bins`
 | Column | Type | Description |
 | :--- | :--- | :--- |
-| `bin_id` | INTEGER | Unique Bin ID |
-| `capacity` | INTEGER | Volume capacity |
-| `location_code` | TEXT | Physical location (e.g., A1, B2) |
+| `bin_id` | INT | Unique Bin ID (Auto Increment) |
+| `capacity` | INT | Volume capacity |
+| `location_code` | VARCHAR | Physical location (e.g., A1, B2) |
 
 ## 📥 Installation & Setup Instructions
 
@@ -137,9 +138,19 @@ cd logistech
 ```bash
 pip install -r requirements.txt
 ```
-*(Note: Requires `fastapi`, `uvicorn`)*
+*(Note: Requires `fastapi`, `uvicorn`, `mysql-connector-python`, `python-dotenv`)*
 
-### 3. Run Application
+### 3. Configure Database
+Create a `.env` file in the root directory with your MySQL credentials:
+```ini
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=warehouse
+```
+*Ensure your MySQL server is running and accessible.*
+
+### 4. Run Application
 ```bash
 uvicorn api:app --reload
 ```
