@@ -2,11 +2,14 @@
 
 ![LogisTech Banner](https://placehold.co/1200x300/1e293b/3b82f6?text=LogisTech+Automated+Warehouse+System)
 
+🌐 Live Demo
+
+👉 Deployed Link: https://logistech-prime.onrender.com/
+
 ## Project Description
 
-**LogisTech** is a full-stack Automated Warehouse Orchestration System that manages incoming packages, finds optimal storage bins using **Binary Search**, loads trucks using **Stack** logic, and validates fragile bundle shipments using **Backtracking**.
-
-The entire system is powered by a **Singleton** controller and backed by **SQL-based audit logs** to ensure full traceability.
+LogisTech is a full-stack Automated Warehouse Orchestration System that simulates real-world warehouse operations. It manages incoming packages, finds optimal storage bins using Binary Search, loads trucks using Stack logic, and validates fragile shipments through Backtracking.
+A centralized Singleton Controller powers the entire workflow, while SQL audit logs ensure complete traceability of every operation.
 
 ## 📑 Table of Contents
 1. [Features](#-features)
